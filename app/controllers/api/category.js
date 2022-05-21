@@ -53,4 +53,36 @@ module.exports = {
         const savedCategory = await categoryDataMapper.insert(req.body);
         return res.json(savedCategory);
     },
+
+    /**
+     * Category controller to update a record.
+     * ExpressMiddleware signature
+     * @param {object} req Express request object
+     * @param {object} res Express response object
+     * @returns {string} Route API JSON response
+     */
+    async update(req, res) {
+        const category = await categoryDataMapper.findByPk(req.params.id);
+        if (!category) {
+            throw new ApiError('This category does not exists', { statusCode: 404 });
+        }
+
+        if (req.body.label || req.body.route) {
+            const existingCategory = await categoryDataMapper.isUnique(req.body, req.params.id);
+            if (existingCategory) {
+                let field;
+                if (existingCategory.label === req.body.label) {
+                    field = 'label';
+                } else {
+                    field = 'route';
+                }
+                throw new ApiError(`Other category already exists with this ${field}`, {
+                    statusCode: 400,
+                });
+            }
+        }
+
+        const savedCategory = await categoryDataMapper.update(req.params.id, req.body);
+        return res.json(savedCategory);
+    },
 };

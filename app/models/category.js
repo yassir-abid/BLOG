@@ -57,6 +57,29 @@ module.exports = {
     },
 
     /**
+     * Update category
+     * @param {number} id - id of the category to update
+     * @param {InputCategory} category - Data to update
+     * @returns {Category} - Updated category
+     */
+    async update(id, category) {
+        const fields = Object.keys(category).map((prop, index) => `"${prop}" = $${index + 1}`);
+        const values = Object.values(category);
+
+        const savedCategory = await client.query(
+            `
+                UPDATE category SET
+                    ${fields}
+                WHERE id = $${fields.length + 1}
+                RETURNING *
+            `,
+            [...values, id],
+        );
+
+        return savedCategory.rows[0];
+    },
+
+    /**
      * Checks if a category already exists with the same label or route
      * @param {object} inputData - Data provided
      * @param {number} categoryId - Category id (optional)
