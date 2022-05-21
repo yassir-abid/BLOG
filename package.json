@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/yassir-abid/BLOG#readme",
   "dependencies": {
+    "bunyan": "^1.8.15",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",

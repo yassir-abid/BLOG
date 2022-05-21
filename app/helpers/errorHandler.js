@@ -1,3 +1,4 @@
+const logger = require('./logger');
 const ApiError = require('../errors/apiError');
 const WebsiteError = require('../errors/websiteError');
 
@@ -12,6 +13,10 @@ const errorHandler = (err, res) => {
 
     if (!statusCode || Number.isNaN(Number(statusCode))) {
         statusCode = 500;
+    }
+
+    if (statusCode === 500) {
+        logger.error(err);
     }
 
     if (statusCode === 500 && res.app.get('env') !== 'development') {
