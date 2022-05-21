@@ -19,4 +19,19 @@ module.exports = {
         const result = await client.query('SELECT * FROM post_with_category');
         return result.rows;
     },
+
+    /**
+     * Find post by id
+     * @param {number} postId - id of the desired post
+     * @returns {(Post|undefined)} - The desired post or undefined if no post found with this id
+     */
+    async findByPk(postId) {
+        const result = await client.query('SELECT * FROM post_with_category WHERE id = $1', [postId]);
+
+        if (result.rowCount === 0) {
+            return null;
+        }
+
+        return result.rows[0];
+    },
 };

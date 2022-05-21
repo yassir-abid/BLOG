@@ -15,4 +15,17 @@ router
      */
     .get(controllerHandler(controller.getAll));
 
+router
+    .route('/:id(\\d+)')
+    /**
+     * GET /api/posts/{id}
+     * @summary Get one post
+     * @tags Post
+     * @param {number} id.path.required - post identifier
+     * @return {Post} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Post not found - application/json
+     */
+    .get(controllerHandler(controller.getOne));
+
 module.exports = router;
