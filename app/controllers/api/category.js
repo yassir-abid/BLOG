@@ -85,4 +85,21 @@ module.exports = {
         const savedCategory = await categoryDataMapper.update(req.params.id, req.body);
         return res.json(savedCategory);
     },
+
+    /**
+     * Category controller to delete a record.
+     * ExpressMiddleware signature
+     * @param {object} req Express request object
+     * @param {object} res Express response object
+     * @returns {string} Route API JSON response
+     */
+    async delete(req, res) {
+        const category = await categoryDataMapper.findByPk(req.params.id);
+        if (!category) {
+            throw new ApiError('This category does not exists', { statusCode: 404 });
+        }
+
+        await categoryDataMapper.delete(req.params.id);
+        return res.status(204).json();
+    },
 };

@@ -51,6 +51,16 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Category not found - application/json
      */
-    .patch(validate('body', updateSchema), controllerHandler(controller.update));
+    .patch(validate('body', updateSchema), controllerHandler(controller.update))
+    /**
+     * DELETE /api/categories/{id}
+     * @summary Delete one category
+     * @tags Category
+     * @param {number} id.path.required - category identifier
+     * @return {Category} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Category not found - application/json
+     */
+    .delete(controllerHandler(controller.delete));
 
 module.exports = router;
