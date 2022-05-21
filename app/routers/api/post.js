@@ -1,5 +1,8 @@
 const express = require('express');
 
+const validate = require('../../validation/validator');
+const createSchema = require('../../validation/schemas/postCreateSchema');
+
 const { postController: controller } = require('../../controllers/api');
 const controllerHandler = require('../../helpers/controllerHandler');
 
@@ -13,7 +16,16 @@ router
      * @tags Post
      * @return {array<Post>} 200 - success response - application/json
      */
-    .get(controllerHandler(controller.getAll));
+    .get(controllerHandler(controller.getAll))
+    /**
+     * POST /api/posts
+     * @summary Create a post
+     * @tags Post
+     * @param {InputPost} request.body.required - post info
+     * @return {Post} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     */
+    .post(validate('body', createSchema), controllerHandler(controller.create));
 
 router
     .route('/:id(\\d+)')
