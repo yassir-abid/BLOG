@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "resetDB": "sqitch revert -y; sqitch deploy; DEBUG=import:* node ./data/import-data.js"
+    "resetDB": "sqitch revert -y; sqitch deploy; DEBUG=import:* node ./data/import-data.js",
+    "start": "node .",
+    "dev": "DEBUG=*,-express:*,-nodemon*,-body*,-send* npx nodemon",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -18,8 +21,23 @@
   },
   "homepage": "https://github.com/yassir-abid/BLOG#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
-    "pg": "^8.7.3"
+    "express": "^4.18.1",
+    "express-jsdoc-swagger": "^1.6.8",
+    "multer": "^1.4.4",
+    "pg": "^8.7.3",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-sql": "^0.4.1"
   }
 }
