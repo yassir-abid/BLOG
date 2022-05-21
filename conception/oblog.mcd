@@ -1,0 +1,5 @@
+POST: slug, titre, extrait, contenu
+:
+
+CONTIENT, 11 POST, 0N CATEGORIE
+CATEGORIE: label, route
