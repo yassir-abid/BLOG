@@ -1,4 +1,5 @@
 const categoryController = require('./category');
+const postController = require('./post');
 
 const apiController = {
     /**
@@ -16,4 +17,4 @@ const apiController = {
     },
 };
 
-module.exports = { apiController, categoryController };
+module.exports = { apiController, categoryController, postController };

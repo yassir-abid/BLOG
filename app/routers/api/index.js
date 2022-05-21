@@ -1,6 +1,7 @@
 const express = require('express');
 
 const categoryRouter = require('./category');
+const postRouter = require('./post');
 const { apiController } = require('../../controllers/api');
 
 const { ApiError } = require('../../helpers/errorHandler');
@@ -15,6 +16,7 @@ router.use((_, res, next) => {
 router.all('/', apiController.home);
 
 router.use('/categories', categoryRouter);
+router.use('/posts', postRouter);
 
 router.use(() => {
     throw new ApiError('API Route not found', { statusCode: 404 });
