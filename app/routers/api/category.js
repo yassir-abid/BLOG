@@ -1,5 +1,8 @@
 const express = require('express');
 
+const validate = require('../../validation/validator');
+const createSchema = require('../../validation/schemas/categoryCreateSchema');
+
 const { categoryController: controller } = require('../../controllers/api');
 const controllerHandler = require('../../helpers/controllerHandler');
 
@@ -11,9 +14,19 @@ router
      * GET /api/categories
      * @summary Get all categories
      * @tags Category
-     * @return {[Category]} 200 - success response - application/json
+     * @return {array<Category>} 200 - success response - application/json
      */
-    .get(controllerHandler(controller.getAll));
+    .get(controllerHandler(controller.getAll))
+    /**
+     * POST /api/categories
+     * @summary Create a category
+     * @tags Category
+     * @param {InputCategory} request.body.required - category info
+     * @return {Category} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Category not found - application/json
+     */
+    .post(validate('body', createSchema), controllerHandler(controller.create));
 
 router
     .route('/:id(\\d+)')

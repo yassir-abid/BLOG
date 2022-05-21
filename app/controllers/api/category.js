@@ -19,7 +19,7 @@ module.exports = {
      * ExpressMiddleware signature
      * @param {object} req Express request object
      * @param {object} res Express response object
-     * @returns {string} Route API JSON response
+     * @returns {array<Category>} Route API JSON response
      */
     async getOne(req, res) {
         const category = await categoryDataMapper.findByPk(req.params.id);
@@ -29,5 +29,28 @@ module.exports = {
         }
 
         return res.json(category);
+    },
+
+    /**
+     * Category controller to create a record.
+     * ExpressMiddleware signature
+     * @param {object} req Express request object
+     * @param {object} res Express response object
+     * @returns {Category} Route API JSON response
+     */
+    async create(req, res) {
+        const category = await categoryDataMapper.isUnique(req.body);
+        if (category) {
+            let field;
+            if (category.label === req.body.label) {
+                field = 'label';
+            } else {
+                field = 'route';
+            }
+            throw new ApiError(`Category already exists with this ${field}`, { statusCode: 400 });
+        }
+
+        const savedCategory = await categoryDataMapper.insert(req.body);
+        return res.json(savedCategory);
     },
 };
