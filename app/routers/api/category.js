@@ -15,4 +15,17 @@ router
      */
     .get(controllerHandler(controller.getAll));
 
+router
+    .route('/:id(\\d+)')
+    /**
+     * GET /api/categories/{id}
+     * @summary Get one category
+     * @tags Category
+     * @param {number} id.path.required - category identifier
+     * @return {Category} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Category not found - application/json
+     */
+    .get(controllerHandler(controller.getOne));
+
 module.exports = router;
