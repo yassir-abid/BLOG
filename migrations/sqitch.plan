@@ -3,3 +3,4 @@
 
 schema 2022-05-21T22:32:53Z yassir-abid <abid.yassir@gmail.com> # category and post schemas
 types 2022-05-21T22:35:34Z yassir-abid <abid.yassir@gmail.com> # Column checks
+post_with_category 2022-05-21T23:43:58Z yassir-abid <abid.yassir@gmail.com> # View to add category to posts
