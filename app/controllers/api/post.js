@@ -7,7 +7,7 @@ module.exports = {
      * ExpressMiddleware signature
      * @param {object} _ Express req.object (not used)
      * @param {object} res Express response object
-     * @returns {array<Post>} Route API JSON response
+     * @returns {string} Route API JSON response
      */
     async getAll(_, res) {
         const posts = await postDataMapper.findAll();
@@ -51,6 +51,38 @@ module.exports = {
         }
 
         const savedPost = await postDataMapper.insert(req.body);
+        return res.json(savedPost);
+    },
+
+    /**
+     * Post controller to update a record.
+     * ExpressMiddleware signature
+     * @param {object} req Express req.object
+     * @param {object} res Express response object
+     * @returns {string} Route API JSON response
+     */
+    async update(req, res) {
+        const post = await postDataMapper.findByPk(req.params.id);
+        if (!post) {
+            throw new ApiError('This post does not exists', { statusCode: 404 });
+        }
+
+        if (req.body.slug || req.body.title) {
+            const existingPost = await postDataMapper.isUnique(req.body, req.params.id);
+            if (existingPost) {
+                let field;
+                if (existingPost.slug === req.body.slug) {
+                    field = 'slug';
+                } else {
+                    field = 'title';
+                }
+                throw new ApiError(`Other post already exists with this ${field}`, {
+                    statusCode: 400,
+                });
+            }
+        }
+
+        const savedPost = await postDataMapper.update(req.params.id, req.body);
         return res.json(savedPost);
     },
 };

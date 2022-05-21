@@ -19,7 +19,7 @@ module.exports = {
      * ExpressMiddleware signature
      * @param {object} req Express request object
      * @param {object} res Express response object
-     * @returns {array<Category>} Route API JSON response
+     * @returns {string} Route API JSON response
      */
     async getOne(req, res) {
         const category = await categoryDataMapper.findByPk(req.params.id);
@@ -36,7 +36,7 @@ module.exports = {
      * ExpressMiddleware signature
      * @param {object} req Express request object
      * @param {object} res Express response object
-     * @returns {Category} Route API JSON response
+     * @returns {string} Route API JSON response
      */
     async create(req, res) {
         const category = await categoryDataMapper.isUnique(req.body);

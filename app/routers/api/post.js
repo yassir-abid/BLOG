@@ -2,6 +2,7 @@ const express = require('express');
 
 const validate = require('../../validation/validator');
 const createSchema = require('../../validation/schemas/postCreateSchema');
+const updateSchema = require('../../validation/schemas/postUpdateSchema');
 
 const { postController: controller } = require('../../controllers/api');
 const controllerHandler = require('../../helpers/controllerHandler');
@@ -38,6 +39,17 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Post not found - application/json
      */
-    .get(controllerHandler(controller.getOne));
+    .get(controllerHandler(controller.getOne))
+    /**
+     * PATCH /api/posts/{id}
+     * @summary Update one post
+     * @tags Post
+     * @param {number} id.path.required - post identifier
+     * @param {InputPost} request.body.required - post info
+     * @return {Post} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Post not found - application/json
+     */
+    .patch(validate('body', updateSchema), controllerHandler(controller.update));
 
 module.exports = router;

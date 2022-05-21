@@ -63,6 +63,29 @@ module.exports = {
     },
 
     /**
+     * Update post
+     * @param {number} id - id of the post to update
+     * @param {InputPost} post - Data to update
+     * @returns {Post} - Updated post
+     */
+    async update(id, post) {
+        const fields = Object.keys(post).map((prop, index) => `"${prop}" = $${index + 1}`);
+        const values = Object.values(post);
+
+        const savedPost = await client.query(
+            `
+                UPDATE post SET
+                    ${fields}
+                WHERE id = $${fields.length + 1}
+                RETURNING *
+            `,
+            [...values, id],
+        );
+
+        return savedPost.rows[0];
+    },
+
+    /**
      * Checks if a post already exists with the same title or slug
      * @param {object} inputData - Data provided
      * @param {number} postId - Post id (optional)
