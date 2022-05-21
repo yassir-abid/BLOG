@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "resetDB": "sqitch revert -y; sqitch deploy; DEBUG=import:* node ./data/import-data.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/yassir-abid/BLOG/issues"
   },
-  "homepage": "https://github.com/yassir-abid/BLOG#readme"
+  "homepage": "https://github.com/yassir-abid/BLOG#readme",
+  "dependencies": {
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "pg": "^8.7.3"
+  }
 }

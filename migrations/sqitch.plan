@@ -1,0 +1,5 @@
+%syntax-version=1.0.0
+%project=blog
+
+schema 2022-05-21T22:32:53Z yassir-abid <abid.yassir@gmail.com> # category and post schemas
+types 2022-05-21T22:35:34Z yassir-abid <abid.yassir@gmail.com> # Column checks

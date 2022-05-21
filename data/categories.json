@@ -1,0 +1,14 @@
+[
+    {
+        "route": "/burger",
+        "label": "Burger"
+    },
+    {
+        "route": "/pizza",
+        "label": "Pizza"
+    },
+    {
+        "route": "/pasta",
+        "label": "Pasta"
+    }
+]
