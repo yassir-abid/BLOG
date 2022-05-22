@@ -177,6 +177,10 @@ body {
     margin-bottom: 2rem;
 }
 
+.card_detail {
+    margin-bottom: 2rem;
+}
+
 .card-header {
     text-align: center;
 }
@@ -214,6 +218,16 @@ body {
 .card-content p {
     font-size: 1.1em;
     line-height: 1.5;
+}
+
+.card-excerpt {
+    padding: 1rem;
+}
+
+.card-excerpt p {
+    font-size: 1em;
+    line-height: 1.5;
+    font-style:italic;
 }
 
 .card-footer {
