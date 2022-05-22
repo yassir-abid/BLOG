@@ -13,6 +13,7 @@ router.use((_, res, next) => {
 
 router.get('/', websiteController.home);
 router.get('/posts', websiteController.post);
+router.get('/about', websiteController.about);
 
 router.use(() => {
     throw new WebsiteError('Page introuvable', { statusCode: 404 });
