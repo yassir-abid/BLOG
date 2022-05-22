@@ -38,9 +38,21 @@ body {
     min-height: 92vh;
 }
 
+.header-title {
+    padding: 1.4rem 2rem;
+    background: #000;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
 .rounded {
     border-radius: 10px;
     overflow: hidden;
+}
+
+.center {
+    text-align: center;
 }
 
 .picture {
@@ -227,6 +239,102 @@ body {
 /*********POST**********/
 
 
+/*********ERROR*********/
+.fundo{
+    animation: scales 3s alternate  infinite;
+    transform-origin: center;
+}
+.pao-baixo{
+    animation: rotatepao 14s cubic-bezier(.1,.49,.41,.97)  infinite;
+    transform-origin: center;
+}
+.pao-cima{
+    animation: rotatepao 7s 1s cubic-bezier(.1,.49,.41,.97)  infinite;
+    transform-origin: center;
+}
+.olhos{animation: olhos   2s  alternate  infinite;
+    transform-origin: center;
+}
+
+.left-sparks{animation: left-sparks   4s  alternate  infinite;
+    transform-origin: 150px 156px;
+}
+
+.right-sparks{animation: left-sparks   4s  alternate  infinite;
+    transform-origin: 310px 150px;
+}
+
+.olhos{animation: olhos   2s  alternate  infinite;
+    transform-origin: center;
+}
+@keyframes scales{
+    from { transform: scale(0.98)}
+    to{ transform: scale(1)}
+}
+
+@keyframes rotatepao{
+    0% { transform:  rotate(0deg)}
+    50% , 60%{ transform:  rotate(-20deg)}
+    100%{  transform:  rotate(0deg) }
+}
+
+@keyframes olhos{
+    0%{
+        transform: rotateX(0deg);
+    }
+    100%{
+        transform: rotateX(30deg);
+    }
+}
+
+@keyframes left-sparks{
+    0%{
+        opacity: 0;
+    }
+}
+
+.path {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: dash 4s   alternate infinite;
+}
+
+@keyframes dash{
+    0%, 30%{
+        fill: 4B4B62;
+        stroke-dashoffset:   0;
+    }
+    80%,100%{
+        fill: transparent;
+        stroke-dashoffset:  -200;
+    }
+}
+
+.error-page-content{
+    min-height: 500px;
+    margin: 0px auto;
+    width: auto;
+    max-width: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-page-text {
+    top: 30%;
+    padding: 1rem;
+    font-size: 2rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.error-page-footer {
+    text-align: center;
+    margin: 1rem;
+}
+/*********ERROR*********/
+
+
 /********FOOTER*********/
 .footer {
     background: #111;
@@ -304,6 +412,11 @@ body {
     .page {
         padding: 0 1rem;
         min-height: 68vh;
+    }
+
+    .header-title {
+        text-align: center;
+        border-bottom: 3px solid var(--main-color);
     }
 
     .nav {

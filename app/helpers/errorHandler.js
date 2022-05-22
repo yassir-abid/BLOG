@@ -1,3 +1,4 @@
+const path = require('path');
 const logger = require('./logger');
 const ApiError = require('../errors/apiError');
 const WebsiteError = require('../errors/websiteError');
@@ -24,7 +25,11 @@ const errorHandler = (err, res) => {
     }
 
     if (res.get('Content-type').includes('html')) {
-        res.status(statusCode).send('error');
+        if (statusCode === 404) {
+            res.sendFile(path.join(__dirname, '../../public/html/error404.html'));
+        } else {
+            res.sendFile(path.join(__dirname, '../../public/html/error.html'));
+        }
     } else {
         res.status(statusCode).json({
             status: 'error',
