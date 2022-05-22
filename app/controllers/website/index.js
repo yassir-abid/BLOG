@@ -1,13 +1,15 @@
+const path = require('path');
+
 const websiteController = {
     /**
-     * Home controller which display documentation link.
+     * Home controller which display posts List.
      * ExpressMiddleware signature
      * @param {object} _ Express request object (not used)
      * @param {object} res Express response object
-     * @returns {string} Route API JSON response
+     * @returns {string} html page of posts List
      */
     home(_, res) {
-        res.render('home', { title: 'Blog - API REST' });
+        res.sendFile(path.join(__dirname, '../../../public/html/postsList.html'));
     },
 };
 

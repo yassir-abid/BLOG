@@ -24,11 +24,7 @@ const errorHandler = (err, res) => {
     }
 
     if (res.get('Content-type').includes('html')) {
-        res.status(statusCode).render('error', {
-            statusCode,
-            message,
-            title: `Error ${err.statusCode}`,
-        });
+        res.status(statusCode).send('error');
     } else {
         res.status(statusCode).json({
             status: 'error',

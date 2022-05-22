@@ -12,8 +12,9 @@ const app = express();
 // expressJSDocSwagger
 require('./helpers/apiDocs')(app);
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Middleware to parse JSON payload
 app.use(express.json());

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Délices</title>
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/postsList.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <form class="search">
+                <input type="search" class="search-input" value="" placeholder="Rechercher" />
+            </form>
+            <nav class="nav">
+                <h2 class="title">Navigation</h2>
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/about">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main class="page">
+            <article class="content">
+                <div class="content-focus">
+                    <div class="content-titles">
+                        <h1 class="content-title content-title--main">Blog DELICES</h1>
+                        <h2 class="content-title content-title--sub">Aimer, croquer et partager la vie avec gourmandise…
+                        </h2>
+                    </div>
+                    <figure class="content-picture rounded">
+                        <img class="picture"
+                            src="https://cdn.pixabay.com/photo/2018/06/04/01/40/stalls-3452163_960_720.png"
+                            alt="No Food No Life" />
+                        <figcaption class="picture-desc">No Food No Life</figcaption>
+                    </figure>
+                </div>
+            </article>
+            <section class="articles">
+                <div class="articles-container">
+
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            Délices &copy; Tous droits réservés
+        </footer>
+    </div>
+
+    <!-- post-template -->
+    <template id="post-template">
+        <article class="card">
+            <header class="card-header">
+                <figure class="card-picture rounded">
+                    <img class="picture rounded" src="#" alt="#" />
+                    <figcaption class="card-category rounded">Catégorie</figcaption>
+                </figure>
+                <h3 class="card-title">Titre</h3>
+            </header>
+            <section class="card-content">
+                <p>Excerpt</p>
+            </section>
+            <footer class="card-footer">
+                <a class="btn" href="#">Lire la suite</a>
+            </footer>
+        </article>
+    </template>
+
+</body>
+
+</html>
