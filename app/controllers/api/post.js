@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 const postDataMapper = require('../../models/post');
 const categoryDataMapper = require('../../models/category');
 const { ApiError } = require('../../helpers/errorHandler');
@@ -67,6 +69,24 @@ module.exports = {
             throw new ApiError(`Post already exists with this ${field}`, { statusCode: 400 });
         }
 
+        const category = await categoryDataMapper.findByPk(req.body.category_id);
+
+        if (!category) {
+            throw new ApiError('Category not found', { statusCode: 404 });
+        }
+
+        const response = await fetch(`https://foodish-api.herokuapp.com/api/images/${category.label.toLowerCase()}`);
+        const json = await response.json();
+
+        let illustration;
+        if (json.image) {
+            illustration = json.image;
+        } else {
+            illustration = 'https://cdn.pixabay.com/photo/2014/06/11/17/00/food-366875_960_720.jpg';
+        }
+
+        req.body.picture = illustration;
+
         const savedPost = await postDataMapper.insert(req.body);
         return res.json(savedPost);
     },
@@ -97,6 +117,26 @@ module.exports = {
                     statusCode: 400,
                 });
             }
+        }
+
+        if (req.body.category_id) {
+            const category = await categoryDataMapper.findByPk(req.body.category_id);
+
+            if (!category) {
+                throw new ApiError('Category not found', { statusCode: 404 });
+            }
+
+            const response = await fetch(`https://foodish-api.herokuapp.com/api/images/${category.label.toLowerCase()}`);
+            const json = await response.json();
+
+            let illustration;
+            if (json.image) {
+                illustration = json.image;
+            } else {
+                illustration = 'https://cdn.pixabay.com/photo/2014/06/11/17/00/food-366875_960_720.jpg';
+            }
+
+            req.body.picture = illustration;
         }
 
         const savedPost = await postDataMapper.update(req.params.id, req.body);

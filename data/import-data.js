@@ -53,15 +53,16 @@ const client = require('../app/config/db');
         const insertPostQuery = {
             text: `
                 INSERT INTO "post"
-                ("slug", "title", "excerpt", "content", "category_id")
+                ("slug", "title", "excerpt", "content", "picture", "category_id")
                 VALUES
-                ($1, $2, $3, $4, $5)
+                ($1, $2, $3, $4, $5, $6)
             `,
             values: [
                 post.slug,
                 post.title,
                 post.excerpt,
                 post.content,
+                post.picture,
                 postCategory.id,
             ],
         };

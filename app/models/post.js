@@ -7,6 +7,7 @@ const client = require('../config/db');
  * @property {string} title - Post title
  * @property {string} excerpt - Post excerpt
  * @property {string} content - Post content
+ * @property {string} picture - Post illustration
  * @property {number} category_id - Id of the category linked to the post
  * @property {string} category - Label of the category linked to the post
  */
@@ -65,10 +66,10 @@ module.exports = {
         const savedPost = await client.query(
             `
         INSERT INTO post
-        (slug, title, excerpt, content, category_id) VALUES
-        ($1, $2, $3, $4, $5) RETURNING *
+        (slug, title, excerpt, content, picture, category_id) VALUES
+        ($1, $2, $3, $4, $5, $6) RETURNING *
       `,
-            [post.slug, post.title, post.excerpt, post.content, post.category_id],
+            [post.slug, post.title, post.excerpt, post.content, post.picture, post.category_id],
         );
 
         return savedPost.rows[0];
