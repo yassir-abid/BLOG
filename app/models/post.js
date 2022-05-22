@@ -45,6 +45,18 @@ module.exports = {
     },
 
     /**
+    * Find All posts by category id
+    * @param {number} categoryId - id of the desired category
+    * @returns {Post[]} - List of posts related to this category
+    */
+    async findByCategoryId(categoryId) {
+        const result = await client.query('SELECT * FROM post_with_category WHERE category_id = $1', [
+            categoryId,
+        ]);
+        return result.rows;
+    },
+
+    /**
      * Add post in the database
      * @param {InputPost} post - Data to insert
      * @returns {Post} - Inserted post

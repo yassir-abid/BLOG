@@ -1,4 +1,5 @@
 const postDataMapper = require('../../models/post');
+const categoryDataMapper = require('../../models/category');
 const { ApiError } = require('../../helpers/errorHandler');
 
 module.exports = {
@@ -29,6 +30,22 @@ module.exports = {
         }
 
         return res.json(post);
+    },
+
+    /**
+     * Post controller to get all records of specific category.
+     * ExpressMiddleware signature
+     * @param {object} req Express req.object
+     * @param {object} res Express response object
+     * @returns {string} Route API JSON response
+     */
+    async getByCategoryId(req, res) {
+        const category = await categoryDataMapper.findByPk(req.params.id);
+        if (!category) {
+            throw new ApiError('Category not found', { statusCode: 404 });
+        }
+        const posts = await postDataMapper.findByCategoryId(req.params.id);
+        return res.json(posts);
     },
 
     /**

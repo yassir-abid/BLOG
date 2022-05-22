@@ -29,6 +29,19 @@ router
     .post(validate('body', createSchema), controllerHandler(controller.create));
 
 router
+    .route('/category/:id(\\d+)')
+    /**
+     * GET /api/posts/category/{id}
+     * @summary Get posts by category
+     * @tags Post
+     * @param {number} id.path.required - category identifier
+     * @return {array<Post>} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Category not found - application/json
+     */
+    .get(controllerHandler(controller.getByCategoryId));
+
+router
     .route('/:id(\\d+)')
     /**
      * GET /api/posts/{id}
