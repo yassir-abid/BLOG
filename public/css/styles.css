@@ -62,6 +62,10 @@ body {
     margin: auto;
 }
 
+.is-hidden {
+    display: none;
+}
+
 
 /******SEARCH-BAR*******/
 .search {
@@ -316,6 +320,25 @@ body {
 .form-submit button {
     font-weight: bold;
     padding: 1rem;
+}
+
+.form-response {
+    text-align: center;
+    font-weight: bold;
+    background: #00800075;
+    color: #eee;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 30%;
+    margin: auto;
+}
+
+.success-response {
+    background: #00800075;
+}
+
+.failure-response {
+    background: #ff0000b0;
 }
 /********CONTACT********/
 

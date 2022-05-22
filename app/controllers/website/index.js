@@ -1,5 +1,6 @@
 const debug = require('debug')('WebsiteController');
 const path = require('path');
+const sendContactMessage = require('../../helpers/email');
 
 const websiteController = {
     /**
@@ -31,7 +32,7 @@ const websiteController = {
      * ExpressMiddleware signature
      * @param {object} _ Express request object (not used)
      * @param {object} res Express response object
-     * @returns {file} about html page
+     * @returns {string} about html page
      */
     about(_, res) {
         debug('about');
@@ -43,11 +44,24 @@ const websiteController = {
      * ExpressMiddleware signature
      * @param {object} _ Express request object (not used)
      * @param {object} res Express response object
-     * @returns {file} contact html page
+     * @returns {string} contact html page
      */
     contact(_, res) {
         debug('contact');
         res.sendFile(path.join(__dirname, '../../../public/html/contact.html'));
+    },
+
+    /**
+     * Home controller which handle contact form by sending an email.
+     * ExpressMiddleware signature
+     * @param {object} req Express request object
+     * @param {object} res Express response object
+     * @returns {boolean} 200 - success response - application/json
+     */
+    async contactMessage(req, res) {
+        debug('contactMessage');
+        const result = await sendContactMessage(req.body.name, req.body.email, req.body.message);
+        return res.json(result);
     },
 };
 

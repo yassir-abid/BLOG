@@ -1,5 +1,6 @@
 const express = require('express');
 
+const controllerHandler = require('../../helpers/controllerHandler');
 const { websiteController } = require('../../controllers/website');
 
 const { WebsiteError } = require('../../helpers/errorHandler');
@@ -15,6 +16,7 @@ router.get('/', websiteController.home);
 router.get('/posts', websiteController.post);
 router.get('/about', websiteController.about);
 router.get('/contact', websiteController.contact);
+router.post('/contact', controllerHandler(websiteController.contactMessage));
 
 router.use(() => {
     throw new WebsiteError('Page introuvable', { statusCode: 404 });
