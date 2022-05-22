@@ -85,4 +85,21 @@ module.exports = {
         const savedPost = await postDataMapper.update(req.params.id, req.body);
         return res.json(savedPost);
     },
+
+    /**
+     * Post controller to delete a record.
+     * ExpressMiddleware signature
+     * @param {object} req Express req.object
+     * @param {object} res Express response object
+     * @returns {string} Route API JSON response
+     */
+    async delete(req, res) {
+        const post = await postDataMapper.findByPk(req.params.id);
+        if (!post) {
+            throw new ApiError('This post does not exists', { statusCode: 404 });
+        }
+
+        await postDataMapper.delete(req.params.id);
+        return res.status(204).json();
+    },
 };

@@ -50,6 +50,16 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Post not found - application/json
      */
-    .patch(validate('body', updateSchema), controllerHandler(controller.update));
+    .patch(validate('body', updateSchema), controllerHandler(controller.update))
+    /**
+     * DELETE /api/posts/{id}
+     * @summary Delete one post
+     * @tags Post
+     * @param {number} id.path.required - post identifier
+     * @return {Post} 200 - success response - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Post not found - application/json
+     */
+    .delete(controllerHandler(controller.delete));
 
 module.exports = router;

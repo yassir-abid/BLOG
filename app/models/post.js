@@ -86,6 +86,18 @@ module.exports = {
     },
 
     /**
+    * Remove post from the database
+    * @param {number} id - id of the post to delete
+    * @returns {boolean} - Result of the delete operation
+    */
+    async delete(id) {
+        const result = await client.query('DELETE FROM post WHERE id = $1', [id]);
+        // the rowcount is equal to 1 (truthy) or 0 (falsy)
+        // We cast the truthy/falsy as a real boolean
+        return !!result.rowCount;
+    },
+
+    /**
      * Checks if a post already exists with the same title or slug
      * @param {object} inputData - Data provided
      * @param {number} postId - Post id (optional)
