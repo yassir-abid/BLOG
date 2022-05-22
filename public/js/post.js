@@ -1,16 +1,11 @@
 const baseUrl = 'http://localhost:3000';
 
 const app = {
-    init() {
-        app.getOnePostFromAPI();
-    },
-
     async getOnePostFromAPI() {
         try {
             const params = new URLSearchParams(document.location.search);
             const postId = params.get('id');
 
-            // eslint-disable-next-line no-undef
             const response = await fetch(`${baseUrl}/api/posts/${postId}`);
 
             if (response.ok) {
@@ -23,7 +18,6 @@ const app = {
 
                 document.querySelector('.picture').setAttribute('src', post.picture);
                 document.querySelector('.picture').setAttribute('alt', post.title);
-                // eslint-disable-next-line no-undef
                 document.querySelector('.btn').setAttribute('href', `${baseUrl}`);
             }
         } catch (err) {
@@ -31,6 +25,9 @@ const app = {
         }
     },
 
+    init() {
+        app.getOnePostFromAPI();
+    },
 };
 
 document.addEventListener('DOMContentLoaded', app.init);
