@@ -1,3 +1,5 @@
+const debug = require('debug')('CategoryDataMapper');
+
 const client = require('../config/db');
 
 /**
@@ -18,6 +20,7 @@ module.exports = {
      * @returns {Category[]} - All categories of the database
      */
     async findAll() {
+        debug('findAll');
         const result = await client.query('SELECT * FROM category');
         return result.rows;
     },
@@ -29,6 +32,7 @@ module.exports = {
      * The desired category or undefined if no category found with this id
      */
     async findByPk(categoryId) {
+        debug('findByPk');
         const result = await client.query('SELECT * FROM category WHERE id = $1', [categoryId]);
 
         if (result.rowCount === 0) {
@@ -44,6 +48,7 @@ module.exports = {
      * @returns {Category} - Inserted category
      */
     async insert(category) {
+        debug('insert');
         const savedCategory = await client.query(
             `
                 INSERT INTO category
@@ -63,6 +68,7 @@ module.exports = {
      * @returns {Category} - Updated category
      */
     async update(id, category) {
+        debug('update');
         const fields = Object.keys(category).map((prop, index) => `"${prop}" = $${index + 1}`);
         const values = Object.values(category);
 
@@ -85,6 +91,7 @@ module.exports = {
     * @returns {boolean} - Result of the delete operation
     */
     async delete(id) {
+        debug('delete');
         const result = await client.query('DELETE FROM category WHERE id = $1', [id]);
         // the rowcount is equal to 1 (truthy) or 0 (falsy)
         // We cast the truthy/falsy as a real boolean
@@ -99,6 +106,7 @@ module.exports = {
      * or undefined if no category exists with this data
      */
     async isUnique(inputData, categoryId) {
+        debug('isUnique');
         const fields = [];
         const values = [];
         Object.entries(inputData).forEach(([key, value], index) => {

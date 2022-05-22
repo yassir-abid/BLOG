@@ -1,3 +1,5 @@
+const debug = require('debug')('PostController');
+
 const fetch = require('node-fetch');
 
 const postDataMapper = require('../../models/post');
@@ -13,6 +15,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getAll(_, res) {
+        debug('getAll');
         const posts = await postDataMapper.findAll();
         return res.json(posts);
     },
@@ -25,6 +28,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getOne(req, res) {
+        debug('getOne');
         const post = await postDataMapper.findByPk(req.params.id);
 
         if (!post) {
@@ -42,6 +46,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getByCategoryId(req, res) {
+        debug('getByCategoryId');
         const category = await categoryDataMapper.findByPk(req.params.id);
         if (!category) {
             throw new ApiError('Category not found', { statusCode: 404 });
@@ -58,6 +63,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async create(req, res) {
+        debug('create');
         const post = await postDataMapper.isUnique(req.body);
         if (post) {
             let field;
@@ -99,6 +105,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async update(req, res) {
+        debug('update');
         const post = await postDataMapper.findByPk(req.params.id);
         if (!post) {
             throw new ApiError('This post does not exists', { statusCode: 404 });
@@ -151,6 +158,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async delete(req, res) {
+        debug('delete');
         const post = await postDataMapper.findByPk(req.params.id);
         if (!post) {
             throw new ApiError('This post does not exists', { statusCode: 404 });

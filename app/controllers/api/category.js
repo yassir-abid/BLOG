@@ -1,3 +1,5 @@
+const debug = require('debug')('CategoryController');
+
 const categoryDataMapper = require('../../models/category');
 const { ApiError } = require('../../helpers/errorHandler');
 
@@ -10,6 +12,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getAll(_, res) {
+        debug('getAll');
         const categories = await categoryDataMapper.findAll();
         return res.json(categories);
     },
@@ -22,6 +25,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async getOne(req, res) {
+        debug('getOne');
         const category = await categoryDataMapper.findByPk(req.params.id);
 
         if (!category) {
@@ -39,6 +43,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async create(req, res) {
+        debug('create');
         const category = await categoryDataMapper.isUnique(req.body);
         if (category) {
             let field;
@@ -62,6 +67,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async update(req, res) {
+        debug('update');
         const category = await categoryDataMapper.findByPk(req.params.id);
         if (!category) {
             throw new ApiError('This category does not exists', { statusCode: 404 });
@@ -94,6 +100,7 @@ module.exports = {
      * @returns {string} Route API JSON response
      */
     async delete(req, res) {
+        debug('delete');
         const category = await categoryDataMapper.findByPk(req.params.id);
         if (!category) {
             throw new ApiError('This category does not exists', { statusCode: 404 });

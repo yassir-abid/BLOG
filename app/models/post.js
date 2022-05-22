@@ -1,3 +1,5 @@
+const debug = require('debug')('PostDataMapper');
+
 const client = require('../config/db');
 
 /**
@@ -26,6 +28,7 @@ module.exports = {
      * @returns {Post[]} - All posts of the database
      */
     async findAll() {
+        debug('findAll');
         const result = await client.query('SELECT * FROM post_with_category');
         return result.rows;
     },
@@ -36,6 +39,7 @@ module.exports = {
      * @returns {(Post|undefined)} - The desired post or undefined if no post found with this id
      */
     async findByPk(postId) {
+        debug('findByPk');
         const result = await client.query('SELECT * FROM post_with_category WHERE id = $1', [postId]);
 
         if (result.rowCount === 0) {
@@ -51,6 +55,7 @@ module.exports = {
     * @returns {Post[]} - List of posts related to this category
     */
     async findByCategoryId(categoryId) {
+        debug('findByCategoryId');
         const result = await client.query('SELECT * FROM post_with_category WHERE category_id = $1', [
             categoryId,
         ]);
@@ -63,6 +68,7 @@ module.exports = {
      * @returns {Post} - Inserted post
      */
     async insert(post) {
+        debug('insert');
         const savedPost = await client.query(
             `
         INSERT INTO post
@@ -82,6 +88,7 @@ module.exports = {
      * @returns {Post} - Updated post
      */
     async update(id, post) {
+        debug('update');
         const fields = Object.keys(post).map((prop, index) => `"${prop}" = $${index + 1}`);
         const values = Object.values(post);
 
@@ -104,6 +111,7 @@ module.exports = {
     * @returns {boolean} - Result of the delete operation
     */
     async delete(id) {
+        debug('delete');
         const result = await client.query('DELETE FROM post WHERE id = $1', [id]);
         // the rowcount is equal to 1 (truthy) or 0 (falsy)
         // We cast the truthy/falsy as a real boolean
@@ -118,6 +126,7 @@ module.exports = {
      * or undefined if no post exists with this data
      */
     async isUnique(inputData, postId) {
+        debug('isUnique');
         const fields = [];
         const values = [];
         Object.entries(inputData).forEach(([key, value], index) => {
