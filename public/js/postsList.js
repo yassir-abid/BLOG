@@ -31,7 +31,34 @@ const app = {
         }
     },
 
+    async handleSearchForm(event) {
+        event.preventDefault();
+
+        document.querySelector('.articles-container').innerHTML = '';
+
+        const searchText = event.target[0].value.toLowerCase();
+
+        try {
+            const response = await fetch(`${baseUrl}/api/posts`);
+
+            if (response.ok) {
+                const posts = await response.json();
+                // eslint-disable-next-line max-len
+                const foundPosts = posts.filter((post) => post.title.toLowerCase().includes(searchText));
+                app.displayPosts(foundPosts);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    },
+
+    addListenerToSearchForm() {
+        const form = document.querySelector('.search');
+        form.addEventListener('submit', app.handleSearchForm);
+    },
+
     init() {
+        app.addListenerToSearchForm();
         app.getPostsFromAPI();
     },
 
