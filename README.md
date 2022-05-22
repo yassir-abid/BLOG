@@ -1,23 +1,22 @@
 # FOOD BLOG
 
+This blog project is based on:
 
-Ce projet présente un exemple de blog basé sur:
+- REST API using NodeJS, Express and PostgreSQL
+- basic front in html, css and JavaScript (all files are grouped in the `public` folder)
 
-- une API REST en NodeJS, Express et PostgreSQL
-- un front basique en html, css et JavaScript dont les fichiers sont regroupés dans le dossier public (à la racine du projet)
+## App launch
 
-## Lancement du projet
-
-Après avoir cloner le projet et à partir du répertoire du projet:
+After cloning the project and from the project directory, run:
 
 - `npm install`
 
-Création des fichiers:
+Create files:
 
 - `.env`
-- `sqitch.conf`  pour les migrations sqitch
+- `sqitch.conf`  for the sqitch migrations
 
-Exécution du script:
+Run the following script to launch app:
 
 - `npm run dev`
 
@@ -25,79 +24,64 @@ Exécution du script:
 
 ### WEBSITE
 
-- `GET /` pour afficher la page d'accueil avec la liste de tous les articles
-- `GET /posts` pour afficher la page d'un article
-- `GET /about` pour afficher la page "A propos"
-- `GET /contact` pour afficher le formulaire de contact
-- `POST /contact` pour gérer le formulaire de contact et l'envoi du mail
+- `GET /` home page with posts list
+- `GET /posts` post page
+- `GET /about` about page
+- `GET /contact` contact form
+- `POST /contact` handles contact form and sending email
 
 ### API REST
 
 **Posts**:
 
-- `GET /api/posts` pour afficher la liste des articles dans notre base de données
-- `GET /api/posts/:id` pour afficher un unique article à partir de son _id_
-- `GET /api/posts/category/:id` idem mais pour n'afficher que les articles d'une catégorie précise
-- `POST /api/posts` pour créer un article avec validation des données
-- `PATCH /api/posts/:id` pour modifier un article avec validation des données
-- `DELETE /api/posts/:id` pour supprimer un article
+- `GET /api/posts` retrieves all posts from database
+- `GET /api/posts/:id` retrieves one post from database by _id_
+- `GET /api/posts/category/:id` retrieves all posts from database for a specific category
+- `POST /api/posts` create a new post
+- `PATCH /api/posts/:id` update an existing post
+- `DELETE /api/posts/:id` remove a post
 
 **Categories**:
 
-- `GET /api/categories` pour afficher la liste des catégories dans notre base de données
-- `GET /api/categories/:id` pour afficher une catégorie à partir de son _id_
-- `POST /api/categories` pour créer une catégorie avec validation des données
-- `PATCH /api/categories/:id` pour modifier une catégorie avec validation des données
-- `DELETE /api/categories/:id` pour supprimer une catégorie avec validation des données
+- `GET /api/categories` retrieves all categories from database
+- `GET /api/categories/:id` retrieves one category from database by _id_
+- `POST /api/categories` create a new category
+- `PATCH /api/categories/:id` update an existing category
+- `DELETE /api/categories/:id` remove a category
 
 **Documentation**:
 
-- `GET /api/` pour afficher le lien vers la documentation de l'API
+- `GET /api/` API documentation link
 
-Pour être sur que _id_ a bien la forme d'un id (donc un nombre), on utilise une feature d'Express : la validation des paramètres d'URL via les expressions régulières ! Plus d'info [par ici](https://expressjs.com/en/guide/routing.html#route-parameters).
+For ids, we use an Express feature, URL parameters validation by regular expressions! More informations [here](https://expressjs.com/en/guide/routing.html#route-parameters).
 
-## Focus BACK
+## Focus on REST API
 
-### Architecture de l'API REST
+### Architecture
 
-- Routeurs organisés
-- Controllers organisés
-- Lien avec la Base De Données est fait via des dataMappers (par entité)
-- Gestion de l'envoi des mails avec NodeMailer
-- Lien avec les API externe avec node-fetch
-- Gestion des erreurs avec des erreurs et un module custom
-- Debug et logs d'erreurs avec Bunyan
-- Validation des données par JOI
-- Documentation Swagger
+- Organized Routers
+- Organized Controllers
+- DataMappers (by entity) to query database
+- Sending emails with nodemailer
+- Consuming external APIs with node-fetch
+- Error handling using custom errors and modul
+- Debug and error logs with Bunyan
+- Data validation by JOI schemas
+- Swagger documentation
 - Eslint
 
 ### Conception
 
-Le MCD de l'API est disponible dans le dossier `conception`.
+API CDM is availble in the `conception` folder.
 
-### Système de gestion de bases de données (SGBD)
+### DataBase Management System (DBMS)
 
-L'API est basé sur un SGBDR Postgresql.
-Le DDL est géré par des migrations sqitch. Toutes les migrations sont disponibles dans le dossier `migrations`.
+This API uses PostgreSQL DBMS.
+The DDL is implemented with sqitch migrations. All migrations are available in the `migrations` folder.
 
 ### Seeding
 
-Un seeding en JSON est disponible dans le dossier `data`.
-Le script `import-data.js` permet d'implémenter les datas dans la Base De Données.
+JSON seeding is avaible in `data` folder.
+`import-data.js` file import data to database.
 
-Pour implémenter le DDL et le seeding, un script est disponible: `npm run resetDB`
-
-## Focus Front
-
-### Architecture
-
-Les fichiers sont regroupés dans des sous-dossiers du dossier public (à la racine du projet).
-
-**Sous-dossier html**:
-Un fichier html par endpoint et des fichiers pour les erreurs
-
-**Sous-dossier css**:
-Un fichier css pour toute l'application
-
-**Sous-dossier js**:
-Un fichier js par endpoint consommant des données de l'API
+Running `npm run resetDB` script allows to implement DDL and launch Database seeding.
