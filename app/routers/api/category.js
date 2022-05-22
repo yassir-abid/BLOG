@@ -7,6 +7,8 @@ const updateSchema = require('../../validation/schemas/categoryUpdateSchema');
 const { categoryController: controller } = require('../../controllers/api');
 const controllerHandler = require('../../helpers/controllerHandler');
 
+const { cache, flush } = require('../../helpers/cache');
+
 const router = express.Router();
 
 router
@@ -17,7 +19,7 @@ router
      * @tags Category
      * @return {array<Category>} 200 - success response - application/json
      */
-    .get(controllerHandler(controller.getAll))
+    .get(cache, controllerHandler(controller.getAll))
     /**
      * POST /api/categories
      * @summary Create a category
@@ -27,7 +29,7 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Category not found - application/json
      */
-    .post(validate('body', createSchema), controllerHandler(controller.create));
+    .post(validate('body', createSchema), flush, controllerHandler(controller.create));
 
 router
     .route('/:id(\\d+)')
@@ -40,7 +42,7 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Category not found - application/json
      */
-    .get(controllerHandler(controller.getOne))
+    .get(cache, controllerHandler(controller.getOne))
     /**
      * PATCH /api/categories/{id}
      * @summary Update one category
@@ -51,7 +53,7 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Category not found - application/json
      */
-    .patch(validate('body', updateSchema), controllerHandler(controller.update))
+    .patch(validate('body', updateSchema), flush, controllerHandler(controller.update))
     /**
      * DELETE /api/categories/{id}
      * @summary Delete one category
@@ -61,6 +63,6 @@ router
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Category not found - application/json
      */
-    .delete(controllerHandler(controller.delete));
+    .delete(flush, controllerHandler(controller.delete));
 
 module.exports = router;
