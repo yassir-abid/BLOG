@@ -37,6 +37,18 @@ const websiteController = {
         debug('about');
         res.sendFile(path.join(__dirname, '../../../public/html/about.html'));
     },
+
+    /**
+     * Home controller which display contact page.
+     * ExpressMiddleware signature
+     * @param {object} _ Express request object (not used)
+     * @param {object} res Express response object
+     * @returns {file} contact html page
+     */
+    contact(_, res) {
+        debug('contact');
+        res.sendFile(path.join(__dirname, '../../../public/html/contact.html'));
+    },
 };
 
 module.exports = { websiteController };

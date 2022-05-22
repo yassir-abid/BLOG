@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Délices</title>
+    <link href="https://fonts.googleapis.com/css?family=Asap:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/contact.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="/">
+                <h1 class="header-title">
+                    DÉLICES
+                </h1>
+            </a>
+            <nav class="nav">
+                <h2 class="title">Navigation</h2>
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/about">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main class="page">
+            <header class="form-header">
+                <h3 class="form-title">Contact</h3>
+            </header>
+            <!-- <form class="form-content" action="mailto:test@test.com" method="POST"
+                    enctype="multipart/form-data" name="EmailForm"> -->
+            <form class="form-content" action="" method="POST" name="EmailForm">
+                <div class="form-input">
+                    <label class="form-label" for="name">Nom</label>
+                    <input type="text" name="name" id="name" value="">
+                </div>
+                <div class="form-input">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" name="email" id="email" value="">
+                </div>
+                <div class="form-input">
+                    <label class="form-label" for="name">Message</label>
+                    <textarea name="message" id="message" rows="15" value=""></textarea>
+                </div>
+                <div class="form-submit">
+                    <button type="submit">Envoyer</button>
+                </div>
+            </form>
+        </main>
+        <footer class="footer">
+            Délices &copy; Tous droits réservés
+        </footer>
+    </div>
+
+</body>
+
+</html>
