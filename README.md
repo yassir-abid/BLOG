@@ -7,18 +7,24 @@ This blog project is based on:
 
 ## App launch
 
-After cloning the project and from the project directory, run:
+1- After cloning the project and from the project directory, run: `npm install`
 
-- `npm install`
+2- Create a Postgresql database
 
-Create files:
+3- Install **[Sqitch](https://sqitch.org/)**
+
+*For Debian: `sudo apt-get install sqitch libdbd-pg-perl postgresql-client libdbd-sqlite3-perl sqlite3`*
+
+4- Create files:
 
 - `.env`
 - `sqitch.conf`  for the sqitch migrations
 
-Run the following script to launch app:
+5- Run `sqitch deploy`, then `sqitch verify`.
 
-- `npm run dev`
+6- Run the seeding script: `node data/import-data.js`
+
+7- Run the following script to launch app: `npm run dev`
 
 ## Endpoints
 
