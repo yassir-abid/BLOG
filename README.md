@@ -5,6 +5,8 @@ This blog project is based on:
 - REST API using NodeJS, Express and PostgreSQL
 - basic front in html, css and JavaScript (all files are grouped in the `public` folder)
 
+## [See app website](https://blog-delices.herokuapp.com/)
+
 ## App launch
 
 1- After cloning the project and from the project directory, run: `npm install`
