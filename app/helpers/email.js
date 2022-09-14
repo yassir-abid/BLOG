@@ -5,6 +5,18 @@
  * and connecting it to this module using SMTP
  */
 
+/**
+ * To obtain refresh token
+ * 1- Go to the Google Oauth2.0 Playground (https://developers.google.com/oauthplayground/).
+ * 2- Click the Gear Button on the right-top.
+ *  Set your Client ID and Client Secret obtained from the Google Developers Console,
+ *  and select Access token location as Authorization header w/ Bearer prefix.
+ *  Close this configuration overlay.
+ * 3- Set up the scopes. Use https://mail.google.com/ as it's the one need by nodemailer. Then click the Authorize APIs button.
+ * 4- After OAuth2.0 authorization, exchange authorization code for tokens
+ *  and your refresh token is ready-to-use
+ */
+
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
